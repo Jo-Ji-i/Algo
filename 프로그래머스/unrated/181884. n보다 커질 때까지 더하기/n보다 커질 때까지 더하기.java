@@ -1,9 +1,8 @@
 class Solution {
     public int solution(int[] numbers, int n) {
         int result = 0;
-        for(int i : numbers){
-            result += i;
-            if(result > n) break; 
+        for(int i=0; result <= n; i++){
+            result += numbers[i];
         }
         return result;
     }
