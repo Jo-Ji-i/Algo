@@ -1,7 +1,9 @@
-
 import java.util.*;
 
 public class Solution {
+
+    private static final int[] dx = {0, 1, 0, -1};
+    private static final int[] dy = {1, 0, -1, 0};
 
     public static void main(String args[]) throws Exception {
         Scanner sc = new Scanner(System.in);
@@ -14,43 +16,23 @@ public class Solution {
 
             int x = 0;
             int y = 0;
+            int d = 0;
 
-            while(true){
+            for(int n=1; n<=N*N; n++){
                 // right
-                while(true){
-                    arr[x][y] = num++;
-                    if(y+1 == N || arr[x][y+1] != 0) break;
-                    y += 1;
-                }
-                if(x+1 == N || arr[x+1][y] != 0) break;
-                x += 1;
+                arr[x][y] = n;
 
-                // bottom
-                while(true){
-                    arr[x][y] = num++;
-                    if(x+1 == N || arr[x+1][y] != 0) break;
-                    x+=1;
-                }
-                if(y-1 == N || arr[x][y-1] != 0) break;
-                y -= 1;
+                int nx = x + dx[d];
+                int ny = y + dy[d];
 
-                // left
-                while (true){
-                    arr[x][y] = num++;
-                    if(y-1 == -1 || arr[x][y-1] != 0) break;
-                    y -= 1;
+                if(nx == N || ny == N || nx == -1 || ny == -1 || arr[nx][ny] != 0){
+                    d = (d +1) % 4;
+                    nx = x + dx[d];
+                    ny = y + dy[d];
+                    if(nx == N || ny == N || nx == -1 || ny == -1 || arr[nx][ny] != 0) break;
                 }
-                if(x-1 == 0 || arr[x-1][y] != 0) break;
-                x -= 1;
-
-                // up
-                while(true){
-                    arr[x][y] = num++;
-                    if(x-1 == -1 || arr[x-1][y] != 0) break;
-                    x -= 1;
-                }
-                if(y+1 == N || arr[x][y+1] != 0) break;
-                y += 1;
+                x = nx;
+                y = ny;
             }
 
             System.out.println("#" + t);
